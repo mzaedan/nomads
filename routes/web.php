@@ -26,6 +26,9 @@ Route::get('/detail', [DetailController::class, 'index'])
 Route::get('/checkout', [CheckoutController::class, 'index'])
     ->name('checkout');
 
+    Route::get('/checkout/success', [CheckoutController::class, 'success'])
+    ->name('checkout-success');
+
 Route::prefix('admin')
     ->namespace('Admin')
     ->group(function() {
