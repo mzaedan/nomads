@@ -20,32 +20,35 @@
                     <table class="tabel table-bordered" width="100%" cellspacing="0">
                         <thead>
                             <tr>
-                                <th>No</th>
-                                <th>Title</th>
-                                <th>Location</th>
-                                <th>Type</th>
-                                <th>Departure Date</th>
-                                <th>Type</th>
-                                <th>Action</th>
+                                <th style="text-align: center;">No</th>
+                                <th style="text-align: center;">Title</th>
+                                <th style="text-align: center;">Location</th>
+                                <th style="text-align: center;">Type</th>
+                                <th style="text-align: center;">Departure Date</th>
+                                <th style="text-align: center;">Type</th>
+                                <th style="text-align: center;">Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             @forelse($items as $item)
                             <tr>
-                                <td>{{ $loop->iteration }}</td>
-                                <td>{{ $item->title }}</td>
-                                <td>{{ $item->location }}</td>
-                                <td>{{ $item->type }}</td>
-                                <td>{{ $item->departure_date }}</td>
-                                <td>{{ $item->type }}</td>
-                                <td>
+                                <td style="text-align: center;">{{ $loop->iteration }}</td>
+                                <td style="text-align: center;">{{ $item->title }}</td>
+                                <td style="text-align: center;">{{ $item->location }}</td>
+                                <td style="text-align: center;">{{ $item->type }}</td>
+                                <td style="text-align: center;">{{ $item->departure_date }}</td>
+                                <td style="text-align: center;">{{ $item->type }}</td>
+                                <td style="text-align:center;">
+                                    <a href="{{ route('travel-package.show', $item->id) }}" class="btn btn-info">
+                                        <i class="fa fa-eye"></i>
+                                    </a>
                                     <a href="{{ route('travel-package.edit', $item->id) }}" class="btn btn-info">
                                         <i class="fa fa-pencil-alt"></i>
                                     </a>
                                     <form action="{{ route('travel-package.destroy', $item->id) }}" method="POST" class="d-inline">
                                         @csrf
                                         @method('delete')
-                                        <button class="btn btn-danger">
+                                        <button class="btn btn-danger" onclick="return confirm('Are You Sure, You Want To Delete This Data?')">
                                             <i class="fa fa-trash"></i>
                                         </button>
                                     </form>
