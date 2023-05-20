@@ -54,7 +54,7 @@
                 <td>{{ $data->price }}</td>
             </tr>
             </table>
-            <a href="{{ route ('travel-package.index') }}" class="btn btn-primary btn-md">Kembali</a>
+            <a href="{{ route ('gallery.index') }}" class="btn btn-primary btn-md">Kembali</a>
         </div>
     </div>
     
