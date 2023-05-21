@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DetailController;
 use App\Http\Controllers\CheckoutController;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Artisan;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,7 +22,7 @@ use Illuminate\Support\Facades\Auth;
 Route::get('/', [HomeController::class, 'index'])
     ->name('home');
 
-Route::get('/detail', [DetailController::class, 'index'])
+Route::get('/detail/{slug}', [DetailController::class, 'index'])
     ->name('detail');
 
 Route::get('/checkout', [CheckoutController::class, 'index'])
@@ -39,6 +40,11 @@ Route::prefix('admin')
 
         Route::resource('travel-package', TravelPackageController::class);
         Route::resource('gallery', GalleryController::class);
+        Route::resource('transaction', TransactionController::class);
+    });
+
+    Route::get('storage', function () {
+        Artisan::call('storage::url');
     });
 
     
