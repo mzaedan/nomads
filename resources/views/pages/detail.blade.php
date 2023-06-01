@@ -25,70 +25,60 @@
         <div class="row">
           <div class="col-lg-8 pl-lg-0">
             <div class="card card-details">
-              <h1>Nusa Penida</h1>
+              <h1>{{ $item->title }}</h1>
               <p>
-                Republic Of Indonesia
+                {{ $item->location }}
               </p>
+              @if($item->galleries->count())
               <div class="gallery">
                 <div class="xzoom-container">
-                  <img src="frontend/images/details.jpg" class="xzoom" id="xzoom-default" xoriginal="frontend/images/details.jpg">
+                  <img 
+                  src="{{ asset('storage/'.$item->galleries->first()->image) }}" 
+                  class="xzoom" id="xzoom-default" 
+                  xoriginal="{{ asset('storage/'.$item->galleries->first()->image) }}"
+                  / >
                 </div>
                 <div class="div xzoom-thumbs">
-                  <a href="frontend/images/details.jpg">
-                    <img src="frontend/images/details.jpg" class="xzoom-gallery" width="128" xpreview="frontend/images/details.jpg">
-
-                  </a>
-                  <a href="frontend/images/details.jpg">
-                    <img src="frontend/images/details.jpg" class="xzoom-gallery" width="128" xpreview="frontend/images/details.jpg">
+                  @foreach($item->galleries as $gallery)
+                  <a href="{{ asset('storage/'.$gallery->image) }}">
+                    <img 
+                      src="{{ asset('storage/'.$gallery->image) }}"
+                      class="xzoom-gallery"
+                      width="128"
+                      xpreview="{{ asset('storage/'.$gallery->image) }}"
+                      />
                     
                   </a>
-                  <a href="frontend/images/details.jpg">
-                    <img src="frontend/images/details.jpg" class="xzoom-gallery" width="128" xpreview="frontend/images/details.jpg">
-                    
-                  </a>
-                  <a href="frontend/images/details.jpg">
-                    <img src="frontend/images/details.jpg" class="xzoom-gallery" width="128" xpreview="frontend/images/details.jpg">
-                    
-                  </a>
-                  <a href="frontend/images/details.jpg">
-                    <img src="frontend/images/details.jpg" class="xzoom-gallery" width="128" xpreview="frontend/images/details.jpg">
-                    
-                  </a>
+                  @endforeach
                 </div>
               </div>
+              @endif
               <h2>
                 Tentang Wisata
               </h2>
               <p>
-                Nusa Penida is an island southeast of Indonesia’s island Bali and a district of Klungkung 
-                Regency that includes the neighbouring small island of Nusa Lembongan. The Badung 
-                Strait separates the island and Bali. The interior of Nusa Penida is hilly with a maximum 
-                altitude of 524 metres. It is drier than the nearby island of Bali. 
-              </p>
-              <p>
-                Bali and a district of Klungkung Regency that includes the neighbouring small island of 
-                Nusa Lembongan. The Badung Strait separates the island and Bali.
+                {!! $item->about !!}
               </p>
               <div class="features row">
                 <div class="col-md-4">
-                  <img src="frontend/images/ic_event.png" alt="" class="features-image">
+                  <img src="{{ url('frontend/images/ic_event.png') }}" alt="" class="features-image">
                   <div class="description">
                     <h3>Featured Event</h3>
-                    <p>Tari Kecak</p>
+                    <p>{{ $item->featured_event }}</p>
                   </div>
                 </div>
                 <div class="col-md-4 border-left">
-                  <img src="frontend/images/ic_language.png" alt="" class="features-image">
+                  <img src="{{ url('frontend/images/ic_language.png') }}" alt="" class="features-image">
                   <div class="description">
                     <h3>Language</h3>
-                    <p>Bahasa Indonesia</p>
+                    <p>{{ $item->language }}</p>
                   </div>
                 </div>
                 <div class="col-md-4 border-left">
-                  <img src="frontend/images/ic_foods.png" alt="" class="features-image">
+                  <img src="{{ url('frontend/images/ic_foods.png') }}" alt="" class="features-image">
                   <div class="description">
                     <h3>Foods</h3>
-                    <p>Local Foods</p>
+                    <p>{{ $item->foods }}</p>
                   </div>
                 </div>
               </div>
@@ -110,33 +100,43 @@
                 <tr>
                   <th width="50%">Date Of Departures</th>
                   <td width="50%" class="text-right">
-                    22 Aug, 2023
+                    {{ \Carbon\Carbon::create($item->date_of_departure)->format('F n, Y') }}
                   </td>
                 </tr>
                 <tr>
                   <th width="50%">Duration</th>
                   <td width="50%" class="text-right">
-                    4d 3N
+                    {{ $item->duration }}
                   </td>
                 </tr>
                 <tr>
                   <th width="50%">Trip</th>
                   <td width="50%" class="text-right">
-                    Open Trip
+                    {{ $item->type }}
                   </td>
                 </tr>
                 <tr>
                   <th width="50%">Price</th>
                   <td width="50%" class="text-right">
-                    $80.00 / Person
+                    ${{ $item->price }}.00 / Person
                   </td>
                 </tr>
               </table>
             </div>
             <div class="join-container">
-              <a href="{{ route('checkout') }}" class="btn btn-block btn-join-now mt-3 py-2">
-                Join Now
+              @auth
+                <form action="{{ route('checkout_process', $item->id) }}" method="POST">
+                  @csrf
+                  <button class="btn btn-block btn-join-now mt-3 py-2" type="submit">
+                    Join Now
+                  </button>
+                </form>
+              @endauth
+              @guest
+              <a href="{{ route('login') }}" class="btn btn-block btn-join-now mt-3 py-2">
+                Login or Register To Join
               </a>
+              @endguest
             </div>
           </div>
         </div>
