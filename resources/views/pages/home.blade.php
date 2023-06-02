@@ -71,7 +71,7 @@ NOMADS
               $backgroundImage = asset('storage/'.$item->galleries->first()->image);
             }
           @endphp
-              <div class="card-travel text-center d-flex flex-column" style="background: url('{{ $backgroundImage }}');">
+              <div class="card-travel text-center d-flex flex-column" style="background: url('{{ $backgroundImage }}'); background-size: cover; background-position:center">
               <div class="travel-country">{{ $item->location }}</div>
               <div class="travel-location">{{ $item->title }}</div>
               <div class="travel-button mt-auto">

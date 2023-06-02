@@ -33,7 +33,7 @@ Route::get('/checkout/{id}', [CheckoutController::class, 'index'])
 ->name('checkout')
 ->middleware(['auth', 'verified']);
 
-Route::get('/checkout/create/{detail_id}', [CheckoutController::class, 'create'])
+Route::post('/checkout/create/{detail_id}', [CheckoutController::class, 'create'])
         ->name('checkout-create')
         ->middleware(['auth', 'verified']);
 

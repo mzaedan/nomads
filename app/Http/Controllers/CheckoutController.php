@@ -79,7 +79,7 @@ class CheckoutController extends Controller
 
         TransactionDetail::create($data);
 
-        $transaction = Transaction::with(['travel_pacakge'])->find($id);
+        $transaction = Transaction::with(['travel_package'])->find($id);
 
         if($request->is_visa)
         {

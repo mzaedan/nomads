@@ -33,7 +33,7 @@
               <div class="gallery">
                 <div class="xzoom-container">
                   <img 
-                  src="{{ asset('storage/'.$item->galleries->first()->image) }}" 
+                  src="{{ asset('storage/'.$item->galleries->skip(1)->first()->image) }}" 
                   class="xzoom" id="xzoom-default" 
                   xoriginal="{{ asset('storage/'.$item->galleries->first()->image) }}"
                   / >
@@ -47,7 +47,6 @@
                       width="128"
                       xpreview="{{ asset('storage/'.$gallery->image) }}"
                       />
-                    
                   </a>
                   @endforeach
                 </div>
