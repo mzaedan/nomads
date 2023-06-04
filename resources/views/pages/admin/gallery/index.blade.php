@@ -64,8 +64,10 @@
                             </tr>
                             @endforelse
                         </tbody>
-                        
                     </table>
+                    <div class="mt-3 mb-6">
+                        {{ $items->links() }}
+                    </div>
                 </div>
             </div>
         </div>
