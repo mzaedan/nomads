@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Mail;
+use app\Mail\TransactionSuccess;
+
 use App\Models\Transaction;
 use App\Models\TransactionDetail;
 use App\Models\TravelPackage;
@@ -96,10 +99,16 @@ class CheckoutController extends Controller
 
     public function success(Request $request, $id)
     {
-        $transaction = Transaction::findOrfail($id);
+        $transaction = Transaction::with(['details', 'travel_package.galleries', 'user'])
+            ->findOrfail($id);
         $transaction->transaction_status = 'PENDING';
 
         $transaction->save();
+
+        //Kirim Ke Email ke User e-ticket nya
+        Mail::to($transaction->user)->send(
+            new TransactionSuccess($transaction)
+        );
 
         return view('pages.success');
     }
