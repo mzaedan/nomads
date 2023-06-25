@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Mail;
-use app\Mail\TransactionSuccess;
+use App\Mail\TransactionSuccess;
 
 use App\Models\Transaction;
 use App\Models\TransactionDetail;
@@ -104,6 +104,8 @@ class CheckoutController extends Controller
         $transaction->transaction_status = 'PENDING';
 
         $transaction->save();
+
+        // return $transaction;
 
         //Kirim Ke Email ke User e-ticket nya
         Mail::to($transaction->user)->send(
