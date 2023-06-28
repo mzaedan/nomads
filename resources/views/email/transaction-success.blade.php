@@ -228,11 +228,11 @@
                                   <tr>
                                   <tr>
                                     <td><strong>Departure</strong></td>
-                                    <td style="text-align:right;">Nusa Penida
+                                    <td style="text-align:right;">{{ $data->travel_package->title }}</td>
                                   <tr>
                                   <tr>
                                     <td><strong>Date and Time</strong></td>
-                                    <td style="text-align:right;">Thu, 20 Jan, 2023
+                                    <td style="text-align:right;">{{ $data->travel_package->departure_date }}
                                   <tr>
                                 </table>
                               </td>
@@ -243,7 +243,7 @@
                                   <tbody>
                                     <tr>
                                       <td align="center" bgcolor="#FF9E53" role="presentation" style="border:none;border-radius:10px;cursor:auto;mso-padding-alt:10px 25px;background:#FF9E53;" valign="middle">
-                                        <p style="display:inline-block;background:#FF9E53;color:#FFFFFF;font-family:Assistant, Helvetica, Arial, sans-serif;font-size:18px;font-weight:bold;line-height:120%;margin:0;text-decoration:none;text-transform:none;padding:10px 25px;mso-padding-alt:0px;border-radius:10px;"> Check Detail </p>
+                                        <a  href="{{ url('checkout/'. $data->id) }}" style="display:inline-block;background:#FF9E53;color:#FFFFFF;font-family:Assistant, Helvetica, Arial, sans-serif;font-size:18px;font-weight:bold;line-height:120%;margin:0;text-decoration:none;text-transform:none;padding:10px 25px;mso-padding-alt:0px;border-radius:10px;"> Check Detail </a>
                                       </td>
                                     </tr>
                                   </tbody>
